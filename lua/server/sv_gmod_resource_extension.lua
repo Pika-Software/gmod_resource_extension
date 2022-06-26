@@ -15,6 +15,29 @@ function resource.GetAll()
     end
 end
 
+function resource.HasFile( path )
+    local strings = resource.GetAll()
+    for num = 0, #strings do
+        if (strings[ num ] == path) then
+            return true
+        end
+    end
+
+    return false
+end
+
+function resource.HasWorkshop( wsid )
+    local searchable = wsid .. ".gma"
+    local strings = resource.GetAll()
+    for num = 0, #strings do
+        if (strings[ num ] == searchable) then
+            return true
+        end
+    end
+
+    return false
+end
+
 function resource.Clear()
     local data = downloadables()
     if (data ~= nil) then

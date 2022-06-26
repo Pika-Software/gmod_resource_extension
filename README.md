@@ -1,6 +1,14 @@
 # gmod_resource_extension
 
-## Example: `clear all resource`
+## Functions
+- resource.RemoveWorkshop( `string` wsid )
+- resource.HasWorkshop( `string` wsid )
+- resource.RemoveFile( `string` path )
+- resource.HasFile( `string` path )
+- resource.GetAll()
+- resource.Clear()
+
+## Example:
 ```lua
     print( "before")
     PrintTable( resource.GetAll() )
@@ -12,9 +20,3 @@
         PrintTable( resource.GetAll() )
     end)
 ```
-
-## Functions
-`resource.RemoveWorkshop( wsid )`
-`resource.RemoveFile( path )`
-`resource.GetAll()`
-`resource.Clear()`

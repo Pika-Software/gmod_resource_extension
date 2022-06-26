@@ -1,11 +1,12 @@
 # gmod_resource_extension
 
 ## Functions
+- `boolean` resource.HasWorkshop( `string` wsid )
+- `boolean` resource.HasFile( `string` path )
 - resource.RemoveWorkshop( `string` wsid )
-- resource.HasWorkshop( `string` wsid )
 - resource.RemoveFile( `string` path )
-- resource.HasFile( `string` path )
-- resource.GetAll()
+- `table` resource.GetWorkshop()
+- `table` resource.GetAll()
 - resource.Clear()
 
 ## Example:

@@ -92,3 +92,22 @@ do
     end
 
 end
+
+do
+
+    resource.CAddWorkshop = resource.CAddWorkshop or resource.AddWorkshop
+
+    local workshop = {}
+    function resource.GetWorkshop()
+        return workshop
+    end
+
+    function resource.AddWorkshop( workshopid )
+        for num, wsid in ipairs( workshop ) do
+            if (wsid == workshopid) then return end
+        end
+
+        resource.CAddWorkshop( workshopid )
+    end
+
+end

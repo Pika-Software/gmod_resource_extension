@@ -110,14 +110,14 @@ do
 
     resource.CAddWorkshop = resource.CAddWorkshop or resource.AddWorkshop
 
-    local workshop = {}
     function resource.AddWorkshop( workshopid )
-        for num, wsid in ipairs( workshop ) do
+        for num, wsid in ipairs( resource.GetWorkshop() ) do
             if (wsid == workshopid) then return end
         end
 
-        table.insert( workshop, workshopid )
-        resource.CAddWorkshop( workshopid )
+        timer.Simple(0, function()
+            resource.CAddWorkshop( workshopid )
+        end)
     end
 
 end

@@ -173,11 +173,18 @@ do
 
     function resource.AddWorkshop( workshopid )
         for num, wsid in ipairs( resource.GetWorkshop() ) do
+            if (wsid == "") then
+                resource.RemoveWorkshop( wsid )
+            end
+
             if (wsid == workshopid) then return end
         end
 
         timer.Simple(0, function()
-            resource.CAddWorkshop( workshopid )
+            local result = hook.Run( "OnWorkshopAdded", workshopid )
+            if (result == nil) or (result == true) then
+                resource.CAddWorkshop( workshopid )
+            end
         end)
     end
 

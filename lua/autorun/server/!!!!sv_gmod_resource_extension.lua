@@ -93,20 +93,30 @@ do
 
 end
 
+function resource.GetWorkshop()
+    local workshop = {}
+
+    for num, path in ipairs( resource.GetAll() ) do
+        if (path:sub( #path - 3, #path ) == ".gma") then
+            local file_name = string.GetFileFromFilename( path )
+            table.insert( workshop, file_name:sub( 1, #file_name - 4 ) )
+        end
+    end
+
+    return workshop
+end
+
 do
 
     resource.CAddWorkshop = resource.CAddWorkshop or resource.AddWorkshop
 
     local workshop = {}
-    function resource.GetWorkshop()
-        return workshop
-    end
-
     function resource.AddWorkshop( workshopid )
         for num, wsid in ipairs( workshop ) do
             if (wsid == workshopid) then return end
         end
 
+        table.insert( workshop, workshopid )
         resource.CAddWorkshop( workshopid )
     end
 

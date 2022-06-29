@@ -52,9 +52,9 @@ do
     local isstring = isstring
     function resource.RemoveWorkshop( wsid )
         if isstring( wsid ) then
+            local searchable = wsid .. ".gma"
             local data = downloadables()
             if (data ~= nil) then
-                local searchable = wsid .. ".gma"
                 local strings = data:GetStrings()
                 data:Lock( true )
                 data:DeleteAllStrings()
@@ -63,6 +63,39 @@ do
                     local str = strings[ num ]
                     if (str == nil) then continue end
                     if (str == searchable) then continue end
+                    data:AddString( true, str )
+                end
+
+                data:Lock( false )
+            end
+        end
+
+        if istable( wsid ) then
+            local searchable = {}
+            for num, workshopid in ipairs( wsid ) do
+                table.insert( searchable, workshopid .. ".gma" )
+            end
+
+            local data = downloadables()
+            if (data ~= nil) then
+                local strings = data:GetStrings()
+                data:Lock( true )
+                data:DeleteAllStrings()
+
+                for num = 0, #strings do
+                    local str = strings[ num ]
+                    if (str == nil) then continue end
+
+                    local remove = false
+                    for num, path in ipairs( searchable ) do
+                        if (str == path) then
+                            remove = true
+                            break
+                        end
+                    end
+
+                    if (remove) then continue end
+
                     data:AddString( true, str )
                 end
 
@@ -83,6 +116,34 @@ do
                     local str = strings[ num ]
                     if (str == nil) then continue end
                     if (str == path) then continue end
+                    data:AddString( true, str )
+                end
+
+                data:Lock( false )
+            end
+        end
+
+        if istable( path ) then
+            local data = downloadables()
+            if (data ~= nil) then
+                local strings = data:GetStrings()
+                data:Lock( true )
+                data:DeleteAllStrings()
+
+                for num = 0, #strings do
+                    local str = strings[ num ]
+                    if (str == nil) then continue end
+
+                    local remove = false
+                    for num, file_path in ipairs( path ) do
+                        if (str == file_path) then
+                            remove = true
+                            break
+                        end
+                    end
+
+                    if (remove) then continue end
+
                     data:AddString( true, str )
                 end
 
